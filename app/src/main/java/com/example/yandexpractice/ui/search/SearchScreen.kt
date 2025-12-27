@@ -111,7 +111,7 @@ fun SearchScreen(
                             .weight(1f),
                         horizontalAlignment = Alignment.Start
                     ) {
-                        items(items = tracks, key = { it.trackName + it.artistName }) { track ->
+                        items(items = tracks, key = { it.name + it.artistName }) { track ->
                             TrackListItem(track = track)
                             HorizontalDivider(thickness = 0.5.dp)
                         }
@@ -141,4 +141,3 @@ private fun PlaceholderMessage(
         Text(text = text)
     }
 }
-

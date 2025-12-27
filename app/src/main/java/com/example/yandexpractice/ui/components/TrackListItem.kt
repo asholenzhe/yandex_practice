@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.example.yandexpractice.R
 import com.example.yandexpractice.domain.models.Track
+import com.example.yandexpractice.ui.utils.TimeFormatter
 
 @Composable
 fun TrackListItem(
@@ -31,16 +32,18 @@ fun TrackListItem(
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_music),
-            contentDescription = track.trackName
+            contentDescription = track.name
         )
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            Text(text = track.trackName, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            Text(text = track.name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Text(text = track.artistName, style = MaterialTheme.typography.bodyMedium)
         }
-        Text(text = track.trackTime, style = MaterialTheme.typography.bodyMedium)
+        Text(
+            text = TimeFormatter.formatTrackTime(track.timeMillis),
+            style = MaterialTheme.typography.bodyMedium
+        )
     }
 }
-

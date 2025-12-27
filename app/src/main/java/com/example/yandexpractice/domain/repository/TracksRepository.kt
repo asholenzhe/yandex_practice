@@ -1,8 +1,7 @@
-package com.example.yandexpractice.domain.api
+package com.example.yandexpractice.domain.repository
 
 import com.example.yandexpractice.domain.models.Track
 
 interface TracksRepository {
     suspend fun searchTracks(expression: String): List<Track>
 }
-

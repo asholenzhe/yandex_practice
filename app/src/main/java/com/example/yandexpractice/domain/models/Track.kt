@@ -1,8 +1,7 @@
 package com.example.yandexpractice.domain.models
 
-data class Track(
-    val trackName: String,
+class Track(
+    val name: String,
     val artistName: String,
-    val trackTime: String
+    val timeMillis: Int
 )
-

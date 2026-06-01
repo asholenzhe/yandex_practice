@@ -1,8 +1,10 @@
 package com.example.yandexpractice.domain.models
 
 data class Track(
-    val trackName: String,
+    val id: Long = 0,
+    val name: String,
     val artistName: String,
-    val trackTime: String
+    val timeMillis: Int,
+    val favorite: Boolean = false,
+    val playlistId: Long = 0
 )
-

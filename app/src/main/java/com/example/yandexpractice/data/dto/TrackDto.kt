@@ -1,8 +1,7 @@
 package com.example.yandexpractice.data.dto
 
-data class TrackDto(
-    val trackName: String,
+class TrackDto(
+    val name: String,
     val artistName: String,
-    val trackTimeMillis: Int
+    val timeMillis: Int
 )
-

@@ -23,7 +23,9 @@ import com.example.yandexpractice.ui.theme.YandexPracticeTheme
 @Composable
 fun MainScreen(
     modifier: Modifier = Modifier,
-    onSongsClick: () -> Unit,
+    onSearchClick: () -> Unit,
+    onPlaylistsClick: () -> Unit,
+    onFavoritesClick: () -> Unit,
     onSettingsClick: () -> Unit
 ) {
     Surface(modifier = modifier.fillMaxSize()) {
@@ -44,17 +46,19 @@ fun MainScreen(
                 style = MaterialTheme.typography.bodyLarge
             )
             Spacer(modifier = Modifier.height(48.dp))
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onSongsClick
-            ) {
+            Button(modifier = Modifier.fillMaxWidth(), onClick = onSearchClick) {
                 Text(text = stringResource(id = R.string.main_button_songs))
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Button(
-                modifier = Modifier.fillMaxWidth(),
-                onClick = onSettingsClick
-            ) {
+            Button(modifier = Modifier.fillMaxWidth(), onClick = onPlaylistsClick) {
+                Text(text = stringResource(id = R.string.main_button_playlists))
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(modifier = Modifier.fillMaxWidth(), onClick = onFavoritesClick) {
+                Text(text = stringResource(id = R.string.main_button_favorites))
+            }
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(modifier = Modifier.fillMaxWidth(), onClick = onSettingsClick) {
                 Text(text = stringResource(id = R.string.main_button_settings))
             }
         }
@@ -65,7 +69,11 @@ fun MainScreen(
 @Composable
 private fun MainScreenPreview() {
     YandexPracticeTheme {
-        MainScreen(onSongsClick = {}, onSettingsClick = {})
+        MainScreen(
+            onSearchClick = {},
+            onPlaylistsClick = {},
+            onFavoritesClick = {},
+            onSettingsClick = {}
+        )
     }
 }
-

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import com.example.yandexpractice.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -59,13 +60,12 @@ class SettingsViewModel : ViewModel() {
     private fun safeStartActivity(context: Context, intent: Intent) {
         runCatching {
             context.startActivity(intent)
-        }.onFailure { error ->
+        }.onFailure {
             Toast.makeText(
                 context,
-                error.localizedMessage ?: "Не удалось открыть",
+                context.getString(R.string.settings_open_error),
                 Toast.LENGTH_SHORT
             ).show()
         }
     }
 }
-

@@ -17,21 +17,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.example.yandexpractice.R
-import com.example.yandexpractice.domain.models.Track
-import com.example.yandexpractice.ui.utils.TimeFormatter
+import com.example.yandexpractice.domain.models.Playlist
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun TrackListItem(
-    track: Track,
+fun PlaylistListItem(
+    playlist: Playlist,
     modifier: Modifier = Modifier,
     onLongClick: (() -> Unit)? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit
 ) {
     Row(
         modifier = modifier
@@ -42,27 +43,36 @@ fun TrackListItem(
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Box(modifier = Modifier.size(48.dp)) {
-            Image(
-                modifier = Modifier.fillMaxSize(),
-                painter = painterResource(id = R.drawable.ic_music),
-                contentDescription = stringResource(id = R.string.track_cover_cd),
-                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.outline)
-            )
+            if (playlist.coverImageUri != null) {
+                AsyncImage(
+                    model = playlist.coverImageUri,
+                    contentDescription = playlist.name,
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+            } else {
+                Image(
+                    modifier = Modifier.fillMaxSize(),
+                    painter = painterResource(id = R.drawable.ic_music),
+                    contentDescription = playlist.name,
+                    colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.outline)
+                )
+            }
         }
         Column(
             modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
             Text(
-                text = track.name,
+                text = playlist.name,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.SemiBold
             )
-            Text(text = track.artistName, style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = stringResource(id = R.string.tracks_count, playlist.tracks.size),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.outline
+            )
         }
-        Text(
-            text = TimeFormatter.formatTrackTime(track.timeMillis),
-            style = MaterialTheme.typography.bodyMedium
-        )
     }
 }

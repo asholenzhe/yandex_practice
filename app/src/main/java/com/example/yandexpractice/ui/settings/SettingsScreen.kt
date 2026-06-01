@@ -31,7 +31,6 @@ fun SettingsScreen(
     val context = LocalContext.current
     val state by viewModel.state.collectAsState()
 
-    // Получаем строковые ресурсы и инициализируем состояние ViewModel
     val shareMessage = stringResource(id = R.string.settings_share_message)
     val developerEmail = stringResource(id = R.string.developer_email)
     val emailSubject = stringResource(id = R.string.developer_email_subject)
